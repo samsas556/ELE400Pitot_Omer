@@ -40,6 +40,15 @@ int read_pitot(uint32_t* pression, uint32_t* temperature){
 				status2 = buf[0];
 				*pression = (uint32_t)(buf[1]<<16|buf[2]<<8|buf[3]);
 				*temperature = (uint32_t)(buf[4]<<16|buf[5]<<8|buf[6]);
+
+				/*
+				 *
+				 *
+				 * ajout du code de traitement des donner
+				 *
+				 *
+				 *
+				 */
 				success=1;
 			}
 	}
