@@ -8,18 +8,21 @@
 #ifndef INC_PITOT_H_
 #define INC_PITOT_H_
 
-#include "../Src/main.c"
+#include "stm32f4xx_hal.h"
 
-#define ADDR_PITOT 41  // pt a shifter d'un bit vers la droite
-#define START_SINGLE 0xAA
-#define START_AVERAGE2 0xAC
-#define START_AVERAGE4 0xAD
-#define START_AVERAGE8 0xAE
-#define START_AVERAGE16 0xAF
+#define ADDR_PITOT 0x29 // non shift vers la droite
+#define START_SINGLE (uint8_t)0xAA
+#define START_AVERAGE2 (uint8_t)0xAC
+#define START_AVERAGE4 (uint8_t)0xAD
+#define START_AVERAGE8 (uint8_t)0xAE
+#define START_AVERAGE16 (uint8_t)0xAF
 
-HAL_StatusTypeDef init_pitot(void);
 
-int read_pitot(uint32_t* pression, uint32_t* temperature);
+HAL_StatusTypeDef init_pitot(I2C_HandleTypeDef* hi2c);
+
+
+
+int read_pitot(I2C_HandleTypeDef* hi2c , double* pression, double* temperature);
 
 
 #endif /* INC_PITOT_H_ */
