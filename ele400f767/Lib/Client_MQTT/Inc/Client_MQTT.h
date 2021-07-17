@@ -17,9 +17,9 @@
 
 #include "ip_addr.h"
 
-#include "Node_config.h"
+#include "../../Node_MQTT/Inc/Node_config.h"
 
-#include "MQTTPacket.h"
+#include "../../paho_MQTT/Inc/MQTTPacket.h"
 
 /* Function cMqtt_Connect
  *
