@@ -64,7 +64,7 @@ void MX_LWIP_Init(void)
   /* Initilialize the LwIP stack with RTOS */
   tcpip_init( NULL, NULL );
 
-  /* IP addresses initialization with DHCP (IPv4) */
+  /* IP addresses initialization with DHCP (IPv4) */\
   ipaddr.addr = 0;
   netmask.addr = 0;
   gw.addr = 0;

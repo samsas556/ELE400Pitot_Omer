@@ -25,6 +25,11 @@ Core/Startup \
 Drivers/STM32F7xx_HAL_Driver/Src \
 LWIP/App \
 LWIP/Target \
+Lib/Client_MQTT/Src \
+Lib/Node_MQTT/Src \
+Lib/Pitot/Src \
+Lib/debug_interface/Src \
+Lib/paho_MQTT/Src \
 Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
 Middlewares/Third_Party/FreeRTOS/Source \
 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 \

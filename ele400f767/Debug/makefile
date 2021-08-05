@@ -21,6 +21,11 @@ RM := rm -rf
 -include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/subdir.mk
 -include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/subdir.mk
 -include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
+-include Lib/paho_MQTT/Src/subdir.mk
+-include Lib/debug_interface/Src/subdir.mk
+-include Lib/Pitot/Src/subdir.mk
+-include Lib/Node_MQTT/Src/subdir.mk
+-include Lib/Client_MQTT/Src/subdir.mk
 -include LWIP/Target/subdir.mk
 -include LWIP/App/subdir.mk
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk

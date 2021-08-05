@@ -5,13 +5,13 @@
 // Ip address of broker
 #define CONF_IP1 192
 #define CONF_IP2 168
-#define CONF_IP3 0
+#define CONF_IP3 1
 // VM
 //#define CONF_IP4 139
 // Ordi
 //#define CONF_IP4 118
 // Pi
-#define CONF_IP4 190
+#define CONF_IP4 109
 
 // Port number of broker
 #define CONF_PORT 1883

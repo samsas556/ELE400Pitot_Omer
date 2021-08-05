@@ -43,11 +43,11 @@
 
 #include "ip_addr.h"
 
-#include "../../Lib/Client_MQTT/Inc/Client_MQTT.h"
+#include "Client_MQTT.h"
 
-#include "../../Lib/debug_interface/Inc/debug_interface.h"
+#include "debug_interface.h"
 
-#include "../Inc/pitot.h"
+#include "pitot.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -191,6 +191,14 @@ void Start_mqtt_Client(void *argument)
 	/* init code for LWIP */
 	MX_LWIP_Init();
 	/* USER CODE BEGIN Start_mqtt_Client */
+
+	//struct netconn * conn;d
+
+	// Connect to server
+	//conn  = cMqtt_Connect(10,214,96,60,1883);
+	int compteur=0;
+	double pressionMoy=0;
+
 	/* Infinite loop */
 	for(;;)
 	{
@@ -199,10 +207,18 @@ void Start_mqtt_Client(void *argument)
 
 		osStatus_t status_queue = osMessageQueueGet(pitot_queueHandle,&pression,0,0);
 		if(status_queue == osOK){
-			char string[30];
+			char string[40];
 
-			sprintf(string, "pres %.4lf \n\r", pression);
-			HAL_UART_Transmit(&huart3, (uint8_t*)string, strlen(string), HAL_MAX_DELAY);
+			pressionMoy+=pression;
+			//cMqtt_Publish(conn, "1/data/1", string, strlen(string));
+			compteur ++;
+			if(compteur>=10){
+				sprintf(string, "vitesse(m/s) %.4lf \n\r", pressionMoy/10);
+				HAL_UART_Transmit(&huart3, (uint8_t*)string, strlen(string), HAL_MAX_DELAY);
+				compteur=0;
+				pressionMoy=0;
+			}
+
 		}
 
 		osDelay(100);
@@ -212,7 +228,7 @@ void Start_mqtt_Client(void *argument)
 
 /* USER CODE BEGIN Header_Start_pitot_task */
 /**
- * @brief Function implementing the pitot_task thread.
+ * @brief Function implementing the pitot_task thread.d
  * @param argument: Not used
  * @retval None
  */
@@ -221,25 +237,24 @@ void Start_pitot_task(void *argument)
 {
 	/* USER CODE BEGIN Start_pitot_task */
 	/* Infinite loop */
-	double pression;
-	double temp;
+
+	double speed;
 	for(;;)
 	{
 
 		HAL_StatusTypeDef ret = !HAL_OK;
 		while(ret != HAL_OK){
 
-			ret = init_pitot(&hi2c2);
+			ret = init_pitot(&hi2c2,START_AVERAGE16);
 
 		}
-		/* USER CODE END WHILE */
+
 		HAL_GPIO_TogglePin (Led2_GPIO_Port, Led2_Pin);
 		osDelay(100);
 
-		read_pitot(&hi2c2,&pression,&temp);
-
-		osMessageQueuePut(pitot_queueHandle,&pression,0,0);
-
+		if(read_pitot_speed(&hi2c2,&speed))
+			osMessageQueuePut(pitot_queueHandle,&speed,0,0);
+		/* USER CODE END WHILE */
 	}
 	/* USER CODE END Start_pitot_task */
 }
