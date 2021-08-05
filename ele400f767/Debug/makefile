@@ -80,8 +80,8 @@ all: main-build
 main-build: ELE400f767.elf secondary-outputs
 
 # Tool invocations
-ELE400f767.elf: $(OBJS) $(USER_OBJS) /home/rockets/Documents/Code/ele400/ELE400EclairDeGenie/ele400f767/STM32F767ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "ELE400f767.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/rockets/Documents/Code/ele400/ELE400EclairDeGenie/ele400f767/STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ELE400f767.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ELE400f767.elf: $(OBJS) $(USER_OBJS) /home/rockets/Documents/Code/ele400/ELE400git2/ELE400EclairDeGenie/ele400f767/STM32F767ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "ELE400f767.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/rockets/Documents/Code/ele400/ELE400git2/ELE400EclairDeGenie/ele400f767/STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ELE400f767.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

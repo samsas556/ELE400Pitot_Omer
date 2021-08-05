@@ -196,27 +196,28 @@ void Start_mqtt_Client(void *argument)
 
 	// Connect to server
 	//conn  = cMqtt_Connect(10,214,96,60,1883);
-	int compteur=0;
-	double pressionMoy=0;
+	int count=0;
+
+	double avrPressure=0;
 
 	/* Infinite loop */
 	for(;;)
 	{
 
-		double pression;
+		double pressure;
 
-		osStatus_t status_queue = osMessageQueueGet(pitot_queueHandle,&pression,0,0);
+		osStatus_t status_queue = osMessageQueueGet(pitot_queueHandle,&pressure,0,0);
 		if(status_queue == osOK){
 			char string[40];
 
-			pressionMoy+=pression;
+			avrPressure+=pressure;
 			//cMqtt_Publish(conn, "1/data/1", string, strlen(string));
-			compteur ++;
-			if(compteur>=10){
-				sprintf(string, "vitesse(m/s) %.4lf \n\r", pressionMoy/10);
+			count ++;
+			if(count>=10){
+				sprintf(string, "vitesse(m/s) %.4lf \n\r", avrPressure/10);
 				HAL_UART_Transmit(&huart3, (uint8_t*)string, strlen(string), HAL_MAX_DELAY);
-				compteur=0;
-				pressionMoy=0;
+				count=0;
+				avrPressure=0;
 			}
 
 		}

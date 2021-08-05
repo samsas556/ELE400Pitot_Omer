@@ -25,16 +25,16 @@
 #define MAX_RANGE_MULTIPLIER 2.0
 #endif
 
-#define MAX_RANGE 2500.0 //range in Pa
+#define MAX_RANGE 2500.0 //range in Pa(check datasheet for max range)
 
 #define SPEED_CALIBRATION_CONSTANT 1.3
 
 #define ADDR_PITOT 0x29
-#define START_SINGLE (uint8_t)0xAA // init and wait for 4 ms minimum before read
-#define START_AVERAGE2 (uint8_t)0xAC// init and wait for 7 ms minimum before read
-#define START_AVERAGE4 (uint8_t)0xAD// init and wait for 14 ms minimum before read
-#define START_AVERAGE8 (uint8_t)0xAE// init and wait for 28 ms minimum before read
-#define START_AVERAGE16 (uint8_t)0xAF// init and wait for 58 ms minimum before read
+#define START_SINGLE (uint8_t)0xAA // init and wait for 5 ms minimum before read
+#define START_AVERAGE2 (uint8_t)0xAC// init and wait for 8 ms minimum before read
+#define START_AVERAGE4 (uint8_t)0xAD// init and wait for 16 ms minimum before read
+#define START_AVERAGE8 (uint8_t)0xAE// init and wait for 32 ms minimum before read
+#define START_AVERAGE16 (uint8_t)0xAF// init and wait for 62 ms minimum before read
 
 
 HAL_StatusTypeDef init_pitot(I2C_HandleTypeDef* hi2c, int operationMod );
